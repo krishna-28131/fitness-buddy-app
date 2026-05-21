@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import { PlusCircle, LogOut, User, Activity, Dumbbell, CalendarDays, Loader2, Edit2, Trash2 } from 'lucide-react';
+import { PlusCircle, LogOut, User, Activity, Dumbbell, CalendarDays, Loader2, Edit2, Trash2, ShieldAlert } from 'lucide-react';
 import WorkoutDialog from '../components/WorkoutDialog';
 
 export default function Dashboard() {
@@ -73,10 +73,22 @@ export default function Dashboard() {
                             <span className="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">FitnessBuddy</span>
                         </div>
                         <div className="flex items-center space-x-4">
-                            <button onClick={() => navigate('/profile')} className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-full transition-colors hidden sm:block">
+                            {(() => {
+                                const userRole = user?.role || user?.user_metadata?.role || 'user';
+                                return userRole === 'admin' && (
+                                    <button 
+                                        onClick={() => navigate('/admin')} 
+                                        className="flex items-center space-x-2 px-4 py-2 text-sm font-bold text-emerald-400 hover:text-white bg-emerald-500/10 hover:bg-emerald-500 border border-emerald-500/20 hover:border-transparent rounded-full transition-all cursor-pointer"
+                                    >
+                                        <ShieldAlert className="w-4 h-4" />
+                                        <span>Admin Panel</span>
+                                    </button>
+                                );
+                            })()}
+                            <button onClick={() => navigate('/profile')} className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-full transition-colors hidden sm:block font-medium">
                                 <User className="w-5 h-5" />
                             </button>
-                            <button onClick={handleLogout} className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-zinc-400 hover:text-white hover:bg-red-500/10 hover:border-red-500/50 border border-transparent rounded-full transition-all">
+                            <button onClick={handleLogout} className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-zinc-400 hover:text-white hover:bg-red-500/10 hover:border-red-500/50 border border-transparent rounded-full transition-all font-medium">
                                 <LogOut className="w-4 h-4" />
                                 <span className="hidden sm:inline">Logout</span>
                             </button>

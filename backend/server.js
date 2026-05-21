@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import { supabase } from './config/supabase.js';
 import workoutRoutes from './routes/workoutRoutes.js';
 import exerciseRoutes from './routes/exerciseRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import logRoutes from './routes/logRoutes.js';
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ app.use(express.json());
 // Routes
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/exercises', exerciseRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/logs', logRoutes);
 
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok', message: 'Fitness Buddy API is running' });

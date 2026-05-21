@@ -36,7 +36,7 @@ Fitness Buddy is designed to help users log, track, and manage their daily worko
 5. Start the development server: `npm run dev`
 
 ## 🔗 Links and Credentials
-- **Deployment Link**: `[Insert Netlify Link Here]`
+- **Deployment Link**: `https://krishna-28131.github.io/fitness-buddy-app/`
 - **Backend API Link**: `[Insert Render Backend API Link Here]`
 - **Test Credentials**:
   - Email: `demo@example.com`
